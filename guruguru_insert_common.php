@@ -104,8 +104,7 @@ function generateRowData($table_define)
 			case COLUMN_ATTRIBUTE_DATETIME:
 				switch ($val['type'])  {
 				case DATA_TYPE_RANGE:
-					$diff = mt_rand($val['min'], $val['max']);
-					$data = date(COMMON_DATE_FORMAT, time() - $diff);
+					$data = date(COMMON_DATE_FORMAT, mt_rand($val['min'], $val['max']));
 					break;
 				case DATA_TYPE_NUMBER:
 					if (!isset($number_arr[$key])) {
