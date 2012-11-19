@@ -6,7 +6,7 @@
  *
  * @package		guruguruInsert
  * @author		setsuki (yukicon)
- * @copyright	Susugi Ningyokan
+ * @copyright	Susugi Ningyoukan
  * @license		BSD
  **/
 
