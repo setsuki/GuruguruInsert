@@ -35,6 +35,12 @@ $ php guruguru_insert.php -f my_setting.php -b 1000 -l 100 -u my_user -p my_pass
 guruguru_test_tbl.sql を流すとsetting_sample/setting.phpがそのまま使えるテーブルが
 データベースtestに作成されますので、お試しの際はどうぞ。
 
+また、以下のコマンドで指定されたテーブルから設定ファイルのサンプルを生成できます。
+
+-- データベース test の test_tbl の設定ファイルを生成する
+$ php guruguru_setting_generate.php test test_tbl > my_setting.php
+
+
 
 
 ■----------------------------■

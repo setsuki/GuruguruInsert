@@ -40,6 +40,26 @@ function execSQL($db, $sql_str, $sql_param)
 	$stmt->execute($sql_param);
 }
 
+
+
+/**
+ * SQLを実行し、フェッチして返す
+ * @param	PDO			$db				PDOインスタンス
+ * @param	string		$sql_str		SQL文字列
+ * @param	array		$sql_param		SQLパラメータ
+ * @return	array						実行結果配列
+ */
+function fetchAll($db, $sql_str, $sql_param)
+{
+	// SQLを実行
+	$stmt = $db->prepare($sql_str);
+	$stmt->execute($sql_param);
+	
+	return $stmt->fetchAll($fetch_type = PDO::FETCH_ASSOC);
+}
+
+
+
 /**
  * 挿入用のデータを生成する
  * @param	array		$table_define		テーブル定義配列
@@ -130,6 +150,62 @@ function generateRowData($table_define)
 	return $row_data;
 }
 
+
+/**
+ * サンプル設定データを出力する
+ * @param	array		$col_info		DESCで取得したカラム情報
+ */
+function outputSampleColumnData($col_info)
+{
+	// カラムの型によってデータタイプを振り分け
+	$col_type = COLUMN_ATTRIBUTE_STRING;
+	switch ($col_info['Type']) {
+		case 'tinyint':
+		case 'smallint':
+		case 'midiumint':
+		case 'int':
+		case 'bigint':
+		case 'float':
+		case 'double':
+		case 'real':
+		case 'double precision':
+			$col_type = COLUMN_ATTRIBUTE_INT;
+			break;
+		case 'datetime':
+			$col_type = COLUMN_ATTRIBUTE_DATETIME;
+			break;
+		default:
+			$col_type = COLUMN_ATTRIBUTE_STRING;
+			break;
+	}
+	
+	echo "\t'{$col_info['Field']}' => array(\n";
+	
+	// 決定されたタイプに従ってサンプルを出力
+	switch ($col_type) {
+		case COLUMN_ATTRIBUTE_INT:
+			echo "\t\t'attr' => COLUMN_ATTRIBUTE_INT,\n";
+			echo "\t\t'type' => DATA_TYPE_NUMBER,\n";
+			echo "\t\t'start_num' => 1,\n";
+			echo "\t\t'inc_num' => 1,\n";
+			break;
+		case COLUMN_ATTRIBUTE_STRING:
+			echo "\t\t'attr' => COLUMN_ATTRIBUTE_STRING,\n";
+			echo "\t\t'type' => DATA_TYPE_NUMBER,\n";
+			echo "\t\t'prefix' => 'prefix_',\n";
+			echo "\t\t'start_num' => 1,\n";
+			echo "\t\t'inc_num' => 1,\n";
+			break;
+		case COLUMN_ATTRIBUTE_DATETIME:
+			echo "\t\t'attr' => COLUMN_ATTRIBUTE_DATETIME,\n";
+			echo "\t\t'type' => DATA_TYPE_NUMBER,\n";
+			echo "\t\t'start_num' => strtotime('2000-01-01 00:00:00'),\n";
+			echo "\t\t'inc_num' => 1,\n";
+			break;
+	}
+	
+	echo "\t),\n";
+}
 
 
 

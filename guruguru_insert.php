@@ -31,9 +31,9 @@ if (isset($options['m'])) {
 	print "-P port          [optional]mysql port [default:{$port}]\n";
 	print "-u user          [optional]mysql user [default:{$user}]\n";
 	print "-p pass          [optional]mysql pass [default:{$pass}]\n";
-	print "-b base_count    [optional]base insert count [default{$once_ins_cnt}]\n";
-	print "-l loop_count    [optional]loop count [default{$loop_cnt}]\n";
-	print "-f file          [optional]setting file [{$setting_file}]\n";
+	print "-b base_count    [optional]base insert count [default:{$once_ins_cnt}]\n";
+	print "-l loop_count    [optional]loop count [default:{$loop_cnt}]\n";
+	print "-f file          [optional]setting file [default:{$setting_file}]\n";
 	exit;
 }
 
